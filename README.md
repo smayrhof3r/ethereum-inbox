@@ -14,7 +14,7 @@ On the otherhand, as the message variable is public so there is automatically a 
 
 ## Testing
 The testing architecture is as follows:
-![image](https://user-images.githubusercontent.com/101105112/194766488-849a8783-3e4d-44cc-81a9-5f5058ce21a7.png)
+<p><img src="https://user-images.githubusercontent.com/101105112/194766488-849a8783-3e4d-44cc-81a9-5f5058ce21a7.png" alt="diagram" width="200"/></p>
 
 The testing will use the 'Mocha' libraries (new experience for me) and will test the functions coming out of the smart contract (i.e. 'message' and 'setMessage') 
 
