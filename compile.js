@@ -6,4 +6,5 @@ const solc = require('solc');
 const inboxPath = path.resolve(__dirname, 'contracts', 'Inbox.sol');
 const source = fs.readFileSync(inboxPath, 'utf8');
 
-console.log(solc.compile(source, 1));
+//makes the compiled contract available via 'require' to other files
+module.exports = solc.compile(source, 1).contracts[':Inbox'];
