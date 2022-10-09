@@ -16,7 +16,10 @@ On the otherhand, as the message variable is public so there is automatically a 
 The testing architecture is as follows:
 <p><img src="https://user-images.githubusercontent.com/101105112/194766488-849a8783-3e4d-44cc-81a9-5f5058ce21a7.png" alt="diagram" width="200"/></p>
 
-The testing will use the 'Mocha' libraries (new experience for me) and will test the functions coming out of the smart contract (i.e. 'message' and 'setMessage') 
+The testing will use the 'Mocha' testing framework (new experience for me) and will test the functions coming out of the smart contract (i.e. 'message' and 'setMessage') 
+
+Mocha is a javascript testing framework; for now I'll be applying the following three functions:
+<p><img src="https://user-images.githubusercontent.com/101105112/194776554-c56039a4-0e46-4d18-8b58-0e6e530955b0.png" alt="diagram" width="200"/></p>
 
 ## WIP
 I'll keep this Read Me updated as the application takes shape
