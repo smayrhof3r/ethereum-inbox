@@ -16,19 +16,20 @@ const OPTIONS = {
 const Web3 = require('web3');
 const web3 = new Web3(ganache.provider(), null, OPTIONS); //provider depends on the network
 
+// this comes from compile.js where we compiled the code
 const { interface, bytecode } = require('../compile');
 
 // Mocha test framework example
 // class to be tested
-class Car {
-  park() {
-    return 'stopped';
-  }
+// class Car {
+//   park() {
+//     return 'stopped';
+//   }
 
-  drive() {
-    return 'vroom';
-  }
-}
+//   drive() {
+//     return 'vroom';
+//   }
+// }
 
 // Mocha test example
 // let car; // declaring the car outside the function so it isn't scoped to just the beforeEach
@@ -52,6 +53,7 @@ class Car {
 // testing the contract
 let accounts;
 let inbox;
+const INITIAL_STRING = 'Hi there!';
 
 beforeEach(async () => {
   // get a list of all accounts from ganache
@@ -61,13 +63,33 @@ beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
 
   // use one of those accounts to deploy contract
+  // #Contract takes interface as function so it knows how we interact with it
+  // #deploy doesn't 'deploy', just creates object to be deployed
+  // inbox object that's returned/stored represents the actual contract. can call functions on it from the interface
   inbox = await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({ data: bytecode, arguments: ['Hi there!'] })
+    .deploy({ data: bytecode, arguments: [INITIAL_STRING] })
     .send({ from: accounts[0], gas: '1000000' })
 });
 
 describe('Inbox', () => {
   it('deploys a contract', () => {
-    console.log(inbox);
+    // no error when sourcing address. won't work if not deployed. if not defined or null, will fail. must be truthy
+    assert.ok(inbox.options.address)
   });
+
+  it('has a default message', async () => {
+    // this is how we *call* a method that READS data from the contract
+    // need to use async await because it takes some amount of time
+    // #message() input any arguments passsed to the function we are calling on the contract
+    // #call() input is customising the *transaction*. specifying who pays, how much gas, etc
+    const message = await inbox.methods.message().call();
+    assert.equal(message, INITIAL_STRING);
+  });
+
+  it('can be updated', async () => {
+    await inbox.methods.setMessage("new message").send({ from: accounts[0] });
+    const message = await inbox.methods.message().call();
+    assert.equal(message, "new message");
+  });
+
 })
