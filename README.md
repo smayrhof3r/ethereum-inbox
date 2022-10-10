@@ -16,10 +16,16 @@ On the otherhand, as the message variable is public so there is automatically a 
 The testing architecture is as follows:
 <p><img src="https://user-images.githubusercontent.com/101105112/194766488-849a8783-3e4d-44cc-81a9-5f5058ce21a7.png" alt="diagram" width="200"/></p>
 
-The testing will use the 'Mocha' testing framework (new experience for me) and will test the functions coming out of the smart contract (i.e. 'message' and 'setMessage') 
+The testing uses the 'Mocha' testing framework for Javascript, which feels like the TDD used in the Le Wagon course (Ruby). It will test the functions coming out of the smart contract (i.e. 'message' and 'setMessage') 
 
-Mocha is a javascript testing framework; for now I'll be applying the following three functions:
-<p><img src="https://user-images.githubusercontent.com/101105112/194776554-c56039a4-0e46-4d18-8b58-0e6e530955b0.png" alt="diagram" width="200"/></p>
+The tests are functional and check that a contract is deployed, there is a default initial message, and the message can be updated.
+
+Important learnings from this step:
+1. Await / async as a better way to handle async functions that return promises (on course with le Wagon we used .then()
+2. The three functions for writing tests (beforeEach, describes, it) and the assert function for checking results
+3. The syntax for deploying a contract ( .Contract([interface]).deploy([bytecode], [arguments for constructor function]).send({ [from (account)],[gas]) })
+4. The syntax for calling a function ( [contract object].methods.function_name().call() )
+5. The syntax for sending a transaction ( [contract object].methods.function_name().send( { [from (account)] } )
 
 ## WIP
 I'll keep this Read Me updated as the application takes shape
